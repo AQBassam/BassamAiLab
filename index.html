@@ -153,37 +153,10 @@
     .project-card { min-width: 0; border: 1px solid #e3e8df; border-radius: var(--radius); background: var(--paper); overflow: hidden; transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
     .project-card:hover { transform: translateY(-5px); box-shadow: 0 22px 40px rgba(22,59,57,.08); border-color: #c7d8ce; }
     .project-card[hidden] { display: none; }
-    .project-visual { position: relative; min-height: 270px; padding: 22px; overflow: hidden; display: grid; place-items: center; }
+    .project-visual { position: relative; width: 100%; aspect-ratio: 1.9 / 1; min-height: 0; padding: 0; overflow: hidden; background: #e7eee8; }
+    .project-visual img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .visual-fursan { background: #dceee8; }
-    .visual-fursan::before { content: ""; width: 300px; height: 300px; position: absolute; border: 1px solid rgba(24,95,84,.14); border-radius: 50%; top: -178px; left: -60px; }
-    .visual-fursan::after { content: ""; width: 210px; height: 210px; position: absolute; border: 1px solid rgba(24,95,84,.13); border-radius: 50%; bottom: -150px; right: -55px; }
     .visual-dinner { background: #f4e8d9; }
-    .visual-dinner::before { content: ""; width: 300px; height: 300px; position: absolute; border: 1px solid rgba(139,86,48,.16); border-radius: 50%; top: -150px; right: -80px; }
-    .visual-dinner::after { content: ""; width: 250px; height: 250px; position: absolute; border: 1px solid rgba(139,86,48,.15); border-radius: 50%; bottom: -175px; left: -60px; }
-    .visual-label { position: absolute; z-index: 4; top: 18px; right: 20px; font-size: .7rem; letter-spacing: .02em; font-weight: 800; color: rgba(22,59,57,.62); }
-    .visual-index { position: absolute; z-index: 4; top: 18px; left: 20px; width: 33px; height: 33px; display: grid; place-items: center; background: rgba(255,254,250,.65); border: 1px solid rgba(255,255,255,.8); border-radius: 50%; color: #476860; font-size: .7rem; font-weight: 800; direction: ltr; }
-    .fursan-window { position: relative; z-index: 2; display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 17px; width: min(430px, 100%); min-height: 205px; padding: 20px; background: #fffefa; border: 1px solid rgba(255,255,255,.9); border-radius: 20px; box-shadow: 0 20px 45px rgba(18,84,73,.12); transform: rotate(-2deg); }
-    .fursan-window-copy .fursan-mini-title { color: #1b6960; font-weight: 900; font-size: .63rem; }
-    .fursan-window-copy strong { display: block; font-size: 1.2rem; line-height: 1.45; margin-top: 6px; }
-    .fursan-window-copy p { color: #80948a; font-size: .68rem; margin: 6px 0 13px; line-height: 1.7; }
-    .little-pill { display: inline-flex; padding: 5px 9px; border-radius: 8px; background: #e1f1e7; color: #397c68; font-size: .63rem; font-weight: 800; }
-    .fursan-number-board { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .fursan-number { height: 62px; display: grid; place-items: center; background: #f4f8f0; border: 1px solid #e7eee2; border-radius: 14px; color: #245e55; font-size: 1.3rem; font-weight: 900; direction: ltr; }
-    .fursan-number:nth-child(2) { background: #fce8ce; border-color: #f7e0bf; color: #97652e; }
-    .fursan-number:nth-child(3) { background: #e3edf9; border-color: #dbe6f6; color: #577fac; }
-    .fursan-number:nth-child(4) { background: #e9e3f7; border-color: #e0d8f2; color: #7865a7; }
-    .dinner-window { position: relative; z-index: 2; width: min(430px, 100%); padding: 16px; background: #fffdf8; border: 1px solid rgba(255,255,255,.9); border-radius: 20px; box-shadow: 0 20px 45px rgba(117,74,41,.12); transform: rotate(2deg); }
-    .dinner-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 2px 12px; }
-    .dinner-head strong { display: block; font-size: .86rem; }
-    .dinner-head small { display: block; color: #9a8a77; font-size: .61rem; margin-top: 2px; }
-    .dinner-mark { width: 35px; height: 35px; border-radius: 12px; display: grid; place-items: center; background: #e3efdc; color: #4c7952; font-size: 1.05rem; }
-    .dinner-feature { display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #f8f0e3; border-radius: 15px; padding: 12px; }
-    .dinner-feature h4 { margin: 0 0 5px; font-size: .86rem; }
-    .dinner-feature p { margin: 0; font-size: .64rem; color: #92806a; }
-    .dinner-dish { height: 95px; border-radius: 13px; display: grid; place-items: center; background: #fdf8ed; overflow: hidden; }
-    .dinner-dish svg { width: 110px; }
-    .dinner-bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 10px; }
-    .dinner-bar { height: 28px; border-radius: 8px; display: grid; place-items: center; background: #f6f5ed; color: #7c8c70; font-size: .58rem; font-weight: 800; }
     .project-body { padding: 25px 27px 27px; }
     .project-meta { display: flex; align-items: center; gap: 8px; color: var(--teal); font-size: .76rem; font-weight: 800; }
     .project-meta .meta-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
@@ -254,7 +227,7 @@
       .meal-card { left: 6%; }
       .hero h1 { max-width: 800px; }
       .hero-text { max-width: 720px; }
-      .project-visual { min-height: 250px; padding: 18px; }
+      .project-visual { min-height: 0; padding: 0; aspect-ratio: 1.75 / 1; }
       .project-body { padding: 23px; }
       .philosophy-panel { grid-template-columns: 1fr 140px; }
       .philosophy-symbol { width: 130px; height: 130px; }
@@ -296,10 +269,7 @@
       .section-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
       .section-description { font-size: .98rem; }
       .project-grid { grid-template-columns: 1fr; gap: 18px; }
-      .project-visual { min-height: 250px; }
-      .fursan-window { padding: 15px; gap: 12px; }
-      .fursan-window-copy strong { font-size: 1.03rem; }
-      .fursan-number { height: 55px; font-size: 1.15rem; }
+      .project-visual { min-height: 0; padding: 0; aspect-ratio: 1.75 / 1; }
       .project-body { padding: 21px; }
       .project-title { font-size: 1.5rem; }
       .project-description { font-size: .93rem; }
@@ -331,13 +301,7 @@
       .math-inner { padding: 11px; }
       .math-challenge { gap: 7px; }
       .meal-heading h3 { font-size: .9rem; }
-      .project-visual { padding: 15px; min-height: 225px; }
-      .fursan-window { gap: 8px; padding: 11px; }
-      .fursan-window-copy strong { font-size: .92rem; }
-      .fursan-window-copy p { font-size: .61rem; }
-      .fursan-number { height: 48px; font-size: 1rem; }
-      .dinner-feature { grid-template-columns: 1fr 82px; padding: 9px; }
-      .dinner-dish { height: 80px; }
+      .project-visual { padding: 0; min-height: 0; aspect-ratio: 1.55 / 1; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -428,11 +392,7 @@
         <div class="project-grid">
           <article class="project-card reveal" data-category="learning">
             <div class="project-visual visual-fursan">
-              <span class="visual-label">التعلّم حين يصبح تجربة</span><span class="visual-index">01</span>
-              <div class="fursan-window" aria-hidden="true">
-                <div class="fursan-window-copy"><span class="fursan-mini-title">فرسان الحساب</span><strong>كل محاولة<br>تقرّبك من الإتقان.</strong><p>تحديات حسابية وتجربة تعلم تفاعلية.</p><span class="little-pill">هيا نبدأ ←</span></div>
-                <div class="fursan-number-board"><div class="fursan-number">7 × 8</div><div class="fursan-number">56</div><div class="fursan-number">6 × 9</div><div class="fursan-number">54</div></div>
-              </div>
+              <img src="assets/fursan-preview.webp" alt="لقطة شاشة من الواجهة الرئيسية لمنصة فرسان الحساب" width="1400" height="868" loading="lazy" decoding="async">
             </div>
             <div class="project-body">
               <div class="project-meta"><span>تعليم رقمي</span><span class="meta-dot" aria-hidden="true"></span><span>مشروع منشور</span></div>
@@ -443,12 +403,7 @@
           </article>
           <article class="project-card reveal" data-category="daily-life">
             <div class="project-visual visual-dinner">
-              <span class="visual-label">حلّ عملي لاحتياج يومي</span><span class="visual-index">02</span>
-              <div class="dinner-window" aria-hidden="true">
-                <div class="dinner-head"><div><strong>دليل العشاء المنزلي الذكي</strong><small>أفكار أسهل لوجبات البيت</small></div><span class="dinner-mark">✳</span></div>
-                <div class="dinner-feature"><div><h4>العشاء صار أسهل</h4><p>أفكار، مكونات، وخطوات في مكان واحد.</p></div><div class="dinner-dish"><svg viewBox="0 0 120 100" fill="none"><ellipse cx="60" cy="53" rx="47" ry="37" fill="#E7D8B9"/><ellipse cx="60" cy="51" rx="39" ry="30" fill="#FFF9EC"/><ellipse cx="60" cy="51" rx="30" ry="22" fill="#D7E1B5"/><path d="M34 53c5-12 15-17 23-8s15 8 25-1 14 1 7 12-18 15-29 9-21 0-26-12Z" fill="#8DB77A"/><circle cx="45" cy="42" r="7" fill="#E88B69"/><circle cx="72" cy="59" r="8" fill="#EBA17A"/><circle cx="67" cy="39" r="5" fill="#E9C967"/><path d="M40 61c4-7 7-9 12-10m22-4 5 6" stroke="#F5EACF" stroke-width="3" stroke-linecap="round"/></svg></div></div>
-                <div class="dinner-bars"><div class="dinner-bar">أفكار وجبات</div><div class="dinner-bar">المكونات</div><div class="dinner-bar">خطوات التحضير</div></div>
-              </div>
+              <img src="assets/dinner-preview.webp" alt="لقطة شاشة من واجهة دليل العشاء المنزلي الذكي وتخطيط الوجبات" width="1400" height="984" loading="lazy" decoding="async">
             </div>
             <div class="project-body">
               <div class="project-meta"><span>الحياة اليومية</span><span class="meta-dot" aria-hidden="true"></span><span>مشروع منشور</span></div>
