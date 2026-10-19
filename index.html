@@ -100,47 +100,21 @@
     .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 30px; color: #798984; font-size: .81rem; }
     .hero-note svg { flex-shrink: 0; color: var(--teal); }
 
-    /* Hero artwork: custom UI illustrations, not stock imagery */
-    .lab-art { min-height: 490px; position: relative; display: grid; place-items: center; isolation: isolate; }
-    .art-grid { position: absolute; width: 85%; height: 82%; border-radius: 40px; transform: rotate(-5deg); background-image: linear-gradient(rgba(20,82,76,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(20,82,76,.065) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(ellipse at center, #000 24%, transparent 78%); }
-    .orbit { position: absolute; width: 390px; height: 390px; border: 1px solid #d9e2d9; border-radius: 50%; transform: rotate(22deg); }
+    /* Hero artwork: real screenshots from the published projects */
+    .lab-art { min-height: 530px; position: relative; display: block; isolation: isolate; }
+    .art-grid { position: absolute; width: 85%; height: 82%; border-radius: 40px; top: 8%; left: 5%; transform: rotate(-5deg); background-image: linear-gradient(rgba(20,82,76,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(20,82,76,.065) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(ellipse at center, #000 24%, transparent 78%); pointer-events: none; }
+    .orbit { position: absolute; width: 390px; height: 390px; top: 50%; left: 50%; border: 1px solid #d9e2d9; border-radius: 50%; transform: translate(-50%, -50%) rotate(22deg); pointer-events: none; }
     .orbit::before { content: ""; position: absolute; top: 31px; right: 55px; width: 12px; height: 12px; background: var(--coral); border-radius: 50%; box-shadow: 0 0 0 7px rgba(238,161,125,.13); }
     .orbit::after { content: ""; position: absolute; bottom: 33px; left: 45px; width: 8px; height: 8px; background: var(--teal); border-radius: 50%; }
-    .mini-card { position: absolute; background: var(--white); border: 1px solid #e4e7df; box-shadow: var(--shadow); border-radius: 21px; overflow: hidden; }
-    .math-card { top: 39px; right: 11px; width: min(305px, 72%); transform: rotate(5deg); z-index: 2; }
-    .meal-card { bottom: 35px; left: 1px; width: min(303px, 72%); transform: rotate(-5deg); z-index: 3; }
-    .card-top { height: 43px; display: flex; align-items: center; justify-content: space-between; padding-inline: 15px; background: #fbfcf8; border-bottom: 1px solid #edf0e8; }
-    .window-dots { display: flex; gap: 5px; direction: ltr; }
-    .window-dots i { width: 6px; height: 6px; display: block; border-radius: 50%; background: #d7ded5; }
-    .window-label { font-size: .64rem; font-weight: 800; color: #76908a; }
-    .math-inner { padding: 18px; }
-    .tiny-kicker { color: #73908a; font-size: .68rem; font-weight: 800; }
-    .math-inner h3 { font-size: 1.1rem; margin: 4px 0 14px; }
-    .math-challenge { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 10px; }
-    .sum-box { min-height: 116px; border-radius: 17px; background: #e2f0ea; display: grid; place-items: center; text-align: center; color: #185c55; }
-    .sum-box small { color: #5a8178; font-size: .65rem; }
-    .sum-equation { font-weight: 900; font-size: 1.55rem; direction: ltr; letter-spacing: -.07em; line-height: 1.25; }
-    .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-    .answer { display: grid; place-items: center; min-height: 47px; border: 1px solid #dbe4db; border-radius: 10px; color: #5b726b; font-weight: 800; font-size: .9rem; }
-    .answer.correct { background: var(--teal); color: white; border-color: var(--teal); }
-    .progress-row { display: flex; justify-content: space-between; color: #759088; font-size: .67rem; margin-top: 12px; }
-    .progress { height: 5px; background: #e6eee6; border-radius: 10px; overflow: hidden; margin-top: 5px; }
-    .progress span { display: block; width: 68%; height: 100%; border-radius: inherit; background: var(--teal); }
-    .meal-inner { padding: 15px 16px 17px; }
-    .meal-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .meal-heading h3 { margin: 3px 0 0; font-size: 1rem; }
-    .meal-badge { display: inline-flex; align-items: center; gap: 5px; color: #59796b; background: #e8f1e6; border-radius: 8px; padding: 4px 8px; font-size: .61rem; font-weight: 800; white-space: nowrap; }
-    .meal-content { display: grid; grid-template-columns: 94px 1fr; gap: 12px; align-items: center; margin-top: 13px; }
-    .dish-art { height: 98px; display: grid; place-items: center; border-radius: 15px; background: #f4eee0; overflow: hidden; }
-    .dish-art svg { width: 106px; }
-    .ingredient-lines { display: grid; gap: 8px; }
-    .ingredient { display: flex; align-items: center; gap: 7px; font-size: .68rem; color: #526c63; }
-    .ingredient::before { content: ""; width: 7px; height: 7px; flex: 0 0 7px; border-radius: 3px; background: #9fbd8e; }
-    .ingredient:nth-child(2)::before { background: #eaa082; }
-    .ingredient:nth-child(3)::before { background: #e4c665; }
-    .art-sticker { position: absolute; z-index: 4; top: 74px; left: 19px; display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-radius: 14px; background: #fff9e9; border: 1px solid #f0e6c9; box-shadow: 0 10px 25px rgba(80,74,40,.07); transform: rotate(-8deg); font-size: .75rem; font-weight: 800; color: #6f6544; }
-    .sticker-star { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 8px; background: #f1d37c; color: #65562c; font-size: .95rem; }
-    .art-caption { position: absolute; bottom: 1px; right: 50%; transform: translateX(50%); font-size: .76rem; color: #82918a; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+    .hero-shot { position: relative; display: block; margin: 0; padding: 0; overflow: hidden; border: 1px solid #e0e6dd; border-radius: 19px; background: #fff; box-shadow: 0 24px 55px rgba(22,59,57,.15); line-height: 0; text-decoration: none; transition: box-shadow .22s ease; }
+    .hero-shot:hover { box-shadow: 0 30px 66px rgba(22,59,57,.2); }
+    .hero-shot img { display: block; width: 100%; height: auto; background: #fff; }
+    .hero-shot-caption { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 43px; padding: 10px 13px; border-bottom: 1px solid #eef0e9; background: rgba(255,254,250,.98); color: var(--ink); font-size: .76rem; font-weight: 800; line-height: 1.35; }
+    .shot-kicker { color: #81958d; font-size: .62rem; font-weight: 800; letter-spacing: .035em; direction: ltr; white-space: nowrap; }
+    .shot-link { color: var(--teal); font-size: .7rem; direction: ltr; white-space: nowrap; }
+    .hero-shot-fursan { width: min(400px, 74%); margin: 20px 0 0 auto; transform: rotate(3deg); z-index: 2; }
+    .hero-shot-dinner { width: min(370px, 70%); margin: -22px auto 0 0; transform: rotate(-3.2deg); z-index: 3; }
+    .art-caption { position: relative; width: max-content; max-width: 100%; margin: 3px auto 0; padding: 5px 10px; border: 1px solid #e0e6dd; border-radius: 999px; background: rgba(255,254,250,.88); font-size: .72rem; color: #82918a; white-space: nowrap; display: flex; align-items: center; gap: 8px; z-index: 4; }
     .art-caption::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
 
     /* Projects */
@@ -222,9 +196,9 @@
       .hero { padding-top: 55px; }
       .hero-grid { grid-template-columns: 1fr; gap: 25px; }
       .hero-copy { max-width: 760px; }
-      .lab-art { width: min(590px, 100%); margin-inline: auto; min-height: 450px; }
-      .math-card { right: 6%; }
-      .meal-card { left: 6%; }
+      .lab-art { width: min(590px, 100%); margin-inline: auto; min-height: 500px; }
+      .hero-shot-fursan { width: min(400px, 74%); margin-right: 4%; }
+      .hero-shot-dinner { width: min(370px, 70%); margin-left: 4%; }
       .hero h1 { max-width: 800px; }
       .hero-text { max-width: 720px; }
       .project-visual { min-height: 0; padding: 0; aspect-ratio: 1.75 / 1; }
@@ -250,21 +224,14 @@
       .hero-actions { align-items: stretch; }
       .hero-actions .btn { flex: 1 1 auto; padding-inline: 14px; }
       .hero-note { align-items: flex-start; line-height: 1.8; }
-      .lab-art { min-height: 385px; margin-top: 2px; }
+      .lab-art { min-height: 0; margin-top: 2px; padding-bottom: 6px; }
       .orbit { width: 300px; height: 300px; }
-      .math-card { top: 24px; right: 2%; width: min(265px, 78%); }
-      .meal-card { bottom: 20px; left: 1%; width: min(265px, 78%); }
-      .art-sticker { top: 36px; left: 2px; transform: rotate(-8deg) scale(.88); transform-origin: left top; }
-      .math-inner { padding: 13px; }
-      .math-inner h3 { margin-bottom: 10px; font-size: .98rem; }
-      .sum-box { min-height: 90px; }
-      .sum-equation { font-size: 1.35rem; }
-      .answer { min-height: 37px; }
-      .meal-inner { padding: 12px; }
-      .meal-content { grid-template-columns: 78px 1fr; gap: 8px; }
-      .dish-art { height: 82px; }
-      .ingredient { font-size: .62rem; }
-      .art-caption { font-size: .65rem; bottom: -2px; }
+      .hero-shot-fursan { width: 74%; margin-top: 14px; margin-right: 2%; }
+      .hero-shot-dinner { width: 70%; margin-top: -18px; margin-left: 1%; }
+      .hero-shot-caption { min-height: 37px; padding: 8px 10px; font-size: .7rem; }
+      .shot-kicker { font-size: .56rem; }
+      .shot-link { font-size: .64rem; }
+      .art-caption { font-size: .63rem; white-space: normal; text-align: center; }
       .section-head { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 27px; }
       .section-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
       .section-description { font-size: .98rem; }
@@ -294,13 +261,10 @@
       .brand-name { font-size: .95rem; }
       .brand-mark { width: 39px; height: 39px; }
       .hero-actions { flex-direction: column; }
-      .lab-art { min-height: 354px; }
-      .math-card { width: 78%; }
-      .meal-card { width: 78%; }
-      .art-sticker { transform: rotate(-8deg) scale(.76); }
-      .math-inner { padding: 11px; }
-      .math-challenge { gap: 7px; }
-      .meal-heading h3 { font-size: .9rem; }
+      .lab-art { min-height: 0; }
+      .hero-shot-fursan { width: 75%; }
+      .hero-shot-dinner { width: 71%; margin-top: -16px; }
+      .art-caption { max-width: 95%; }
       .project-visual { padding: 0; min-height: 0; aspect-ratio: 1.55 / 1; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -347,33 +311,18 @@
           </div>
         </div>
 
-        <div class="lab-art reveal" aria-label="تصور بصري لمشروعي فرسان الحساب ودليل العشاء المنزلي الذكي">
-          <div class="art-grid" aria-hidden="true"></div><div class="orbit" aria-hidden="true"></div>
-          <div class="art-sticker"><span class="sticker-star">✳</span> الفضول هو نقطة البداية</div>
-          <article class="mini-card math-card" aria-label="تصميم توضيحي لفرسان الحساب">
-            <div class="card-top"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-label">FURSAN / LEARN</span></div>
-            <div class="math-inner">
-              <div class="tiny-kicker">تحدّي اليوم</div><h3>فلنُتقن الحساب معًا</h3>
-              <div class="math-challenge">
-                <div class="sum-box"><small>أوجد الناتج</small><div class="sum-equation">7 × 8</div><div style="font-size:.67rem;font-weight:800">= ?</div></div>
-                <div class="answer-grid"><div class="answer">48</div><div class="answer correct">56 ✓</div><div class="answer">54</div><div class="answer">64</div></div>
-              </div>
-              <div class="progress-row"><span>تقدّمك في التحدي</span><span>68%</span></div><div class="progress"><span></span></div>
-            </div>
-          </article>
-          <article class="mini-card meal-card" aria-label="تصميم توضيحي لدليل العشاء المنزلي الذكي">
-            <div class="card-top"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-label">DINNER / PLANNER</span></div>
-            <div class="meal-inner">
-              <div class="meal-heading"><div><div class="tiny-kicker">فكرة لوجبة اليوم</div><h3>ماذا نطبخ الليلة؟</h3></div><span class="meal-badge">خطة ذكية ✦</span></div>
-              <div class="meal-content">
-                <div class="dish-art" aria-hidden="true">
-                  <svg viewBox="0 0 120 100" fill="none"><ellipse cx="60" cy="53" rx="47" ry="37" fill="#E7D8B9"/><ellipse cx="60" cy="51" rx="39" ry="30" fill="#FFF9EC"/><ellipse cx="60" cy="51" rx="30" ry="22" fill="#D7E1B5"/><path d="M34 53c5-12 15-17 23-8s15 8 25-1 14 1 7 12-18 15-29 9-21 0-26-12Z" fill="#8DB77A"/><circle cx="45" cy="42" r="7" fill="#E88B69"/><circle cx="72" cy="59" r="8" fill="#EBA17A"/><circle cx="67" cy="39" r="5" fill="#E9C967"/><path d="M40 61c4-7 7-9 12-10m22-4 5 6" stroke="#F5EACF" stroke-width="3" stroke-linecap="round"/><path d="M24 25 18 18m80 6 5-7" stroke="#86A679" stroke-width="2" stroke-linecap="round"/></svg>
-                </div>
-                <div class="ingredient-lines"><div class="ingredient">خضروات طازجة</div><div class="ingredient">مكونات متوفرة</div><div class="ingredient">خطوات بسيطة</div></div>
-              </div>
-            </div>
-          </article>
-          <div class="art-caption">مشاريع حقيقية تبدأ من أسئلة يومية</div>
+        <div class="lab-art reveal" aria-label="لقطات حقيقية من واجهتي مشروعي فرسان الحساب ودليل العشاء المنزلي الذكي">
+          <div class="art-grid" aria-hidden="true"></div>
+          <div class="orbit" aria-hidden="true"></div>
+          <a class="hero-shot hero-shot-fursan" href="https://fursan.bassamailab.xyz" target="_blank" rel="noopener noreferrer" aria-label="زيارة مشروع فرسان الحساب">
+            <span class="hero-shot-caption"><span>فرسان الحساب</span><span class="shot-kicker">FURSAN / LEARN</span></span>
+            <img src="assets/fursan-preview.webp" alt="لقطة شاشة حقيقية من الصفحة الرئيسية لمنصة فرسان الحساب" width="1400" height="868" fetchpriority="high" decoding="async">
+          </a>
+          <a class="hero-shot hero-shot-dinner" href="https://dinner.bassamailab.xyz" target="_blank" rel="noopener noreferrer" aria-label="زيارة مشروع دليل العشاء المنزلي الذكي">
+            <span class="hero-shot-caption"><span>دليل العشاء المنزلي الذكي</span><span class="shot-link">VISIT ↗</span></span>
+            <img src="assets/dinner-preview.webp" alt="لقطة شاشة حقيقية من واجهة دليل العشاء المنزلي الذكي" width="1400" height="984" decoding="async">
+          </a>
+          <div class="art-caption">لقطات حقيقية من مشاريع منشورة</div>
         </div>
       </div>
     </section>
