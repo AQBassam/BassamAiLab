@@ -1,434 +1,547 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بسام للذكاء الاصطناعي - Bassam AI Lab</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f2">
+  <meta name="description" content="BassamAI Lab — مختبر شخصي للأفكار والتجارب الرقمية التي أبنيها بمساعدة أدوات الذكاء الاصطناعي.">
+  <meta property="og:title" content="BassamAI Lab — أفكار تبدأ بالفضول">
+  <meta property="og:description" content="مساحة شخصية أستكشف فيها إمكانات الذكاء الاصطناعي، وأحوّل الأفكار والاحتياجات إلى مشاريع رقمية قابلة للاستخدام.">
+  <meta property="og:type" content="website">
+  <title>BassamAI Lab — أفكار تبدأ بالفضول</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f7f7f2;
+      --paper-2: #efefe7;
+      --ink: #163b39;
+      --muted: #667875;
+      --teal: #0d827a;
+      --teal-dark: #105b57;
+      --teal-pale: #dcece6;
+      --line: #dce2d9;
+      --coral: #eea17d;
+      --yellow: #f0cf76;
+      --white: #fffefa;
+      --shadow: 0 24px 60px rgba(22, 59, 57, .09);
+      --radius: 24px;
+      --content: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Tajawal", "Noto Sans Arabic", Tahoma, sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .22;
+      background-image: radial-gradient(#9caea4 .55px, transparent .55px); background-size: 7px 7px;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 80%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img, svg { max-width: 100%; }
+    .container { width: min(var(--content), calc(100% - 48px)); margin-inline: auto; }
+    .section { padding-block: 104px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 34px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--teal); font-size: .83rem; font-weight: 800; letter-spacing: .01em; }
+    .eyebrow::before { content: ""; width: 24px; height: 2px; border-radius: 4px; background: currentColor; }
+    h1,h2,h3,p { margin-top: 0; }
+    h1,h2,h3 { letter-spacing: -.035em; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.3; margin: 14px 0 10px; font-weight: 800; }
+    .section-description { color: var(--muted); max-width: 580px; margin-bottom: 0; font-size: 1.04rem; }
+    .small-link { display: inline-flex; align-items: center; gap: 10px; color: var(--teal-dark); font-weight: 800; white-space: nowrap; transition: gap .2s ease; }
+    .small-link:hover { gap: 15px; }
+    .arrow { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid currentColor; border-radius: 50%; line-height: 1; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+    /* Navigation */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(247,247,242,.86); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(220,226,217,.8); }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; }
+    .brand-mark { position: relative; display: grid; place-items: center; width: 43px; height: 43px; border-radius: 14px; background: var(--ink); color: var(--white); overflow: hidden; }
+    .brand-mark svg { width: 29px; height: 29px; }
+    .brand-mark::after { content: ""; position: absolute; width: 22px; height: 22px; border: 1px solid rgba(255,255,255,.26); border-radius: 50%; left: -7px; bottom: -9px; }
+    .brand-name { font-size: 1.03rem; line-height: 1.2; font-weight: 900; direction: ltr; text-align: right; letter-spacing: -.04em; }
+    .brand-name span { color: var(--teal); }
+    .brand-sub { display: block; margin-top: 4px; font-size: .67rem; line-height: 1.3; color: var(--muted); font-weight: 600; letter-spacing: 0; }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); }
+    .nav-links a { font-size: .91rem; color: #4c6460; font-weight: 700; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta { padding: 11px 18px; border-radius: 12px; background: var(--ink); color: var(--white) !important; box-shadow: 0 5px 0 rgba(22,59,57,.08); }
+    .menu-toggle { display: none; border: 1px solid var(--line); border-radius: 12px; width: 44px; height: 44px; background: var(--white); color: var(--ink); cursor: pointer; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    /* Hero */
+    .hero { position: relative; overflow: hidden; padding: 82px 0 86px; }
+    .hero::before { content: ""; position: absolute; width: 420px; height: 420px; border: 1px solid #e3e4d7; border-radius: 50%; top: -190px; left: -190px; }
+    .hero::after { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid #e7e4d8; border-radius: 50%; bottom: -130px; right: 17%; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr .95fr; align-items: center; gap: clamp(38px, 6vw, 90px); }
+    .hero-copy { max-width: 620px; }
+    .status-pill { display: inline-flex; align-items: center; gap: 10px; padding: 7px 13px; margin-bottom: 21px; border: 1px solid #d5e2d8; border-radius: 999px; color: #3e625c; background: rgba(255,254,250,.74); font-size: .79rem; font-weight: 700; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #219d86; box-shadow: 0 0 0 4px rgba(33,157,134,.12); }
+    .hero h1 { margin: 0; max-width: 680px; font-size: clamp(2.75rem, 5.45vw, 5.05rem); line-height: 1.16; font-weight: 900; letter-spacing: -.055em; }
+    .hero h1 .highlight { position: relative; display: inline-block; z-index: 0; color: var(--teal); white-space: nowrap; }
+    .hero h1 .highlight::after { content: ""; position: absolute; right: 2px; left: 0; bottom: 1px; height: 13px; z-index: -1; background: var(--yellow); opacity: .72; border-radius: 3px; transform: rotate(-1.3deg); }
+    .hero-text { max-width: 555px; margin: 25px 0 27px; font-size: clamp(1.04rem, 1.4vw, 1.19rem); line-height: 2; color: #5f7470; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 13px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 51px; padding: 12px 20px; border: 1px solid transparent; border-radius: 14px; font-weight: 800; font-size: .93rem; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; cursor: pointer; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: var(--white); background: var(--teal-dark); box-shadow: 0 7px 0 rgba(16,91,87,.12); }
+    .btn-primary:hover { background: #0b706a; box-shadow: 0 10px 20px rgba(16,91,87,.13); }
+    .btn-secondary { background: rgba(255,254,250,.68); border-color: #d7ded5; color: var(--ink); }
+    .btn-secondary:hover { background: var(--white); }
+    .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 30px; color: #798984; font-size: .81rem; }
+    .hero-note svg { flex-shrink: 0; color: var(--teal); }
 
-        header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
+    /* Hero artwork: custom UI illustrations, not stock imagery */
+    .lab-art { min-height: 490px; position: relative; display: grid; place-items: center; isolation: isolate; }
+    .art-grid { position: absolute; width: 85%; height: 82%; border-radius: 40px; transform: rotate(-5deg); background-image: linear-gradient(rgba(20,82,76,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(20,82,76,.065) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(ellipse at center, #000 24%, transparent 78%); }
+    .orbit { position: absolute; width: 390px; height: 390px; border: 1px solid #d9e2d9; border-radius: 50%; transform: rotate(22deg); }
+    .orbit::before { content: ""; position: absolute; top: 31px; right: 55px; width: 12px; height: 12px; background: var(--coral); border-radius: 50%; box-shadow: 0 0 0 7px rgba(238,161,125,.13); }
+    .orbit::after { content: ""; position: absolute; bottom: 33px; left: 45px; width: 8px; height: 8px; background: var(--teal); border-radius: 50%; }
+    .mini-card { position: absolute; background: var(--white); border: 1px solid #e4e7df; box-shadow: var(--shadow); border-radius: 21px; overflow: hidden; }
+    .math-card { top: 39px; right: 11px; width: min(305px, 72%); transform: rotate(5deg); z-index: 2; }
+    .meal-card { bottom: 35px; left: 1px; width: min(303px, 72%); transform: rotate(-5deg); z-index: 3; }
+    .card-top { height: 43px; display: flex; align-items: center; justify-content: space-between; padding-inline: 15px; background: #fbfcf8; border-bottom: 1px solid #edf0e8; }
+    .window-dots { display: flex; gap: 5px; direction: ltr; }
+    .window-dots i { width: 6px; height: 6px; display: block; border-radius: 50%; background: #d7ded5; }
+    .window-label { font-size: .64rem; font-weight: 800; color: #76908a; }
+    .math-inner { padding: 18px; }
+    .tiny-kicker { color: #73908a; font-size: .68rem; font-weight: 800; }
+    .math-inner h3 { font-size: 1.1rem; margin: 4px 0 14px; }
+    .math-challenge { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 10px; }
+    .sum-box { min-height: 116px; border-radius: 17px; background: #e2f0ea; display: grid; place-items: center; text-align: center; color: #185c55; }
+    .sum-box small { color: #5a8178; font-size: .65rem; }
+    .sum-equation { font-weight: 900; font-size: 1.55rem; direction: ltr; letter-spacing: -.07em; line-height: 1.25; }
+    .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .answer { display: grid; place-items: center; min-height: 47px; border: 1px solid #dbe4db; border-radius: 10px; color: #5b726b; font-weight: 800; font-size: .9rem; }
+    .answer.correct { background: var(--teal); color: white; border-color: var(--teal); }
+    .progress-row { display: flex; justify-content: space-between; color: #759088; font-size: .67rem; margin-top: 12px; }
+    .progress { height: 5px; background: #e6eee6; border-radius: 10px; overflow: hidden; margin-top: 5px; }
+    .progress span { display: block; width: 68%; height: 100%; border-radius: inherit; background: var(--teal); }
+    .meal-inner { padding: 15px 16px 17px; }
+    .meal-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .meal-heading h3 { margin: 3px 0 0; font-size: 1rem; }
+    .meal-badge { display: inline-flex; align-items: center; gap: 5px; color: #59796b; background: #e8f1e6; border-radius: 8px; padding: 4px 8px; font-size: .61rem; font-weight: 800; white-space: nowrap; }
+    .meal-content { display: grid; grid-template-columns: 94px 1fr; gap: 12px; align-items: center; margin-top: 13px; }
+    .dish-art { height: 98px; display: grid; place-items: center; border-radius: 15px; background: #f4eee0; overflow: hidden; }
+    .dish-art svg { width: 106px; }
+    .ingredient-lines { display: grid; gap: 8px; }
+    .ingredient { display: flex; align-items: center; gap: 7px; font-size: .68rem; color: #526c63; }
+    .ingredient::before { content: ""; width: 7px; height: 7px; flex: 0 0 7px; border-radius: 3px; background: #9fbd8e; }
+    .ingredient:nth-child(2)::before { background: #eaa082; }
+    .ingredient:nth-child(3)::before { background: #e4c665; }
+    .art-sticker { position: absolute; z-index: 4; top: 74px; left: 19px; display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-radius: 14px; background: #fff9e9; border: 1px solid #f0e6c9; box-shadow: 0 10px 25px rgba(80,74,40,.07); transform: rotate(-8deg); font-size: .75rem; font-weight: 800; color: #6f6544; }
+    .sticker-star { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 8px; background: #f1d37c; color: #65562c; font-size: .95rem; }
+    .art-caption { position: absolute; bottom: 1px; right: 50%; transform: translateX(50%); font-size: .76rem; color: #82918a; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+    .art-caption::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* Projects */
+    .projects-section { background: var(--white); border-block: 1px solid #ebece5; }
+    .project-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 27px; }
+    .filter-btn { min-height: 39px; padding: 8px 16px; border: 1px solid #dfe5dc; border-radius: 999px; background: transparent; color: #627670; cursor: pointer; font-size: .83rem; font-weight: 800; transition: .2s ease; }
+    .filter-btn:hover { border-color: #8bb9aa; color: var(--teal); }
+    .filter-btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: white; }
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 23px; }
+    .project-card { min-width: 0; border: 1px solid #e3e8df; border-radius: var(--radius); background: var(--paper); overflow: hidden; transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 22px 40px rgba(22,59,57,.08); border-color: #c7d8ce; }
+    .project-card[hidden] { display: none; }
+    .project-visual { position: relative; min-height: 270px; padding: 22px; overflow: hidden; display: grid; place-items: center; }
+    .visual-fursan { background: #dceee8; }
+    .visual-fursan::before { content: ""; width: 300px; height: 300px; position: absolute; border: 1px solid rgba(24,95,84,.14); border-radius: 50%; top: -178px; left: -60px; }
+    .visual-fursan::after { content: ""; width: 210px; height: 210px; position: absolute; border: 1px solid rgba(24,95,84,.13); border-radius: 50%; bottom: -150px; right: -55px; }
+    .visual-dinner { background: #f4e8d9; }
+    .visual-dinner::before { content: ""; width: 300px; height: 300px; position: absolute; border: 1px solid rgba(139,86,48,.16); border-radius: 50%; top: -150px; right: -80px; }
+    .visual-dinner::after { content: ""; width: 250px; height: 250px; position: absolute; border: 1px solid rgba(139,86,48,.15); border-radius: 50%; bottom: -175px; left: -60px; }
+    .visual-label { position: absolute; z-index: 4; top: 18px; right: 20px; font-size: .7rem; letter-spacing: .02em; font-weight: 800; color: rgba(22,59,57,.62); }
+    .visual-index { position: absolute; z-index: 4; top: 18px; left: 20px; width: 33px; height: 33px; display: grid; place-items: center; background: rgba(255,254,250,.65); border: 1px solid rgba(255,255,255,.8); border-radius: 50%; color: #476860; font-size: .7rem; font-weight: 800; direction: ltr; }
+    .fursan-window { position: relative; z-index: 2; display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 17px; width: min(430px, 100%); min-height: 205px; padding: 20px; background: #fffefa; border: 1px solid rgba(255,255,255,.9); border-radius: 20px; box-shadow: 0 20px 45px rgba(18,84,73,.12); transform: rotate(-2deg); }
+    .fursan-window-copy .fursan-mini-title { color: #1b6960; font-weight: 900; font-size: .63rem; }
+    .fursan-window-copy strong { display: block; font-size: 1.2rem; line-height: 1.45; margin-top: 6px; }
+    .fursan-window-copy p { color: #80948a; font-size: .68rem; margin: 6px 0 13px; line-height: 1.7; }
+    .little-pill { display: inline-flex; padding: 5px 9px; border-radius: 8px; background: #e1f1e7; color: #397c68; font-size: .63rem; font-weight: 800; }
+    .fursan-number-board { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .fursan-number { height: 62px; display: grid; place-items: center; background: #f4f8f0; border: 1px solid #e7eee2; border-radius: 14px; color: #245e55; font-size: 1.3rem; font-weight: 900; direction: ltr; }
+    .fursan-number:nth-child(2) { background: #fce8ce; border-color: #f7e0bf; color: #97652e; }
+    .fursan-number:nth-child(3) { background: #e3edf9; border-color: #dbe6f6; color: #577fac; }
+    .fursan-number:nth-child(4) { background: #e9e3f7; border-color: #e0d8f2; color: #7865a7; }
+    .dinner-window { position: relative; z-index: 2; width: min(430px, 100%); padding: 16px; background: #fffdf8; border: 1px solid rgba(255,255,255,.9); border-radius: 20px; box-shadow: 0 20px 45px rgba(117,74,41,.12); transform: rotate(2deg); }
+    .dinner-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 2px 12px; }
+    .dinner-head strong { display: block; font-size: .86rem; }
+    .dinner-head small { display: block; color: #9a8a77; font-size: .61rem; margin-top: 2px; }
+    .dinner-mark { width: 35px; height: 35px; border-radius: 12px; display: grid; place-items: center; background: #e3efdc; color: #4c7952; font-size: 1.05rem; }
+    .dinner-feature { display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #f8f0e3; border-radius: 15px; padding: 12px; }
+    .dinner-feature h4 { margin: 0 0 5px; font-size: .86rem; }
+    .dinner-feature p { margin: 0; font-size: .64rem; color: #92806a; }
+    .dinner-dish { height: 95px; border-radius: 13px; display: grid; place-items: center; background: #fdf8ed; overflow: hidden; }
+    .dinner-dish svg { width: 110px; }
+    .dinner-bars { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 10px; }
+    .dinner-bar { height: 28px; border-radius: 8px; display: grid; place-items: center; background: #f6f5ed; color: #7c8c70; font-size: .58rem; font-weight: 800; }
+    .project-body { padding: 25px 27px 27px; }
+    .project-meta { display: flex; align-items: center; gap: 8px; color: var(--teal); font-size: .76rem; font-weight: 800; }
+    .project-meta .meta-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
+    .project-title { font-size: clamp(1.4rem, 2vw, 1.8rem); margin: 10px 0 9px; line-height: 1.45; }
+    .project-description { color: var(--muted); font-size: .96rem; margin-bottom: 22px; max-width: 550px; }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 18px; border-top: 1px solid #e2e7df; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: .68rem; color: #6a8078; background: #e9eee6; border-radius: 7px; padding: 4px 9px; font-weight: 700; }
+    .project-link { display: inline-flex; flex-shrink: 0; align-items: center; gap: 8px; font-size: .82rem; font-weight: 900; color: var(--teal-dark); }
+    .project-link .link-icon { display: grid; place-items: center; width: 29px; height: 29px; border: 1px solid #c7d8cd; border-radius: 50%; transition: transform .2s ease; }
+    .project-link:hover .link-icon { transform: translate(-2px, -2px); }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-        }
+    /* Philosophy */
+    .philosophy { padding-block: 98px; }
+    .philosophy-panel { position: relative; display: grid; grid-template-columns: 1fr 200px; gap: 36px; align-items: center; padding: clamp(30px,5vw,65px); background: var(--ink); border-radius: 30px; color: white; overflow: hidden; }
+    .philosophy-panel::before { content: ""; position: absolute; width: 410px; height: 410px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; top: -240px; left: 12%; }
+    .philosophy-panel::after { content: ""; position: absolute; width: 300px; height: 300px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; bottom: -230px; right: 36%; }
+    .philosophy-copy, .philosophy-symbol { position: relative; z-index: 1; }
+    .philosophy-copy .eyebrow { color: #9bd6c3; }
+    .philosophy-copy h2 { max-width: 700px; margin: 13px 0 14px; font-size: clamp(1.9rem,4vw,3.25rem); line-height: 1.35; font-weight: 800; }
+    .philosophy-copy h2 span { color: #9bd6c3; }
+    .philosophy-copy p { max-width: 650px; margin-bottom: 0; color: #c0d1cb; line-height: 2; }
+    .philosophy-symbol { display: grid; place-items: center; justify-self: center; width: 160px; height: 160px; border: 1px solid rgba(190,230,215,.4); border-radius: 50%; transform: rotate(-10deg); }
+    .symbol-inner { position: relative; display: grid; place-items: center; width: 103px; height: 103px; border: 1px solid rgba(190,230,215,.45); border-radius: 27px; background: rgba(255,255,255,.05); }
+    .symbol-inner::before, .symbol-inner::after { content: ""; position: absolute; width: 15px; height: 15px; border-radius: 50%; background: var(--yellow); }
+    .symbol-inner::before { top: -7px; left: 14px; }
+    .symbol-inner::after { bottom: 9px; right: -7px; background: var(--coral); }
+    .symbol-inner svg { width: 54px; height: 54px; }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+    /* Method */
+    .method-section { padding-top: 5px; }
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
+    .method-card { position: relative; padding: 27px; border: 1px solid #e1e6dc; border-radius: 20px; background: rgba(255,254,250,.66); }
+    .method-number { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--teal-pale); color: var(--teal-dark); font-size: .8rem; font-weight: 900; direction: ltr; }
+    .method-card:nth-child(2) .method-number { background: #f8e5d8; color: #9d6344; }
+    .method-card:nth-child(3) .method-number { background: #f6edca; color: #8b7537; }
+    .method-card h3 { margin: 19px 0 7px; font-size: 1.2rem; }
+    .method-card p { color: var(--muted); font-size: .91rem; margin-bottom: 0; }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+    /* About and footer */
+    .about-section { padding-top: 30px; padding-bottom: 96px; }
+    .about-panel { display: flex; align-items: center; justify-content: space-between; gap: 34px; padding: clamp(28px,4vw,47px); background: #e8eee5; border-radius: 24px; }
+    .about-copy { max-width: 740px; }
+    .about-copy h2 { font-size: clamp(1.7rem,3vw,2.5rem); margin: 12px 0 10px; line-height: 1.4; }
+    .about-copy p { color: #5c7169; margin-bottom: 0; line-height: 2; }
+    .about-stamp { display: grid; place-items: center; flex: 0 0 105px; width: 105px; height: 105px; border: 1px solid #bdcfc2; border-radius: 50%; color: var(--teal-dark); transform: rotate(8deg); }
+    .about-stamp span { font-size: .7rem; line-height: 1.4; font-weight: 900; text-align: center; }
+    .site-footer { padding: 27px 0 32px; border-top: 1px solid #e0e5dc; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; color: #5f756e; font-weight: 800; font-size: .8rem; }
+    .footer-brand .brand-mark { width: 34px; height: 34px; border-radius: 11px; }
+    .footer-brand .brand-mark svg { width: 23px; }
+    .footer-note { color: #86958d; font-size: .75rem; }
+    .footer-links { display: flex; gap: 18px; color: #5f756e; font-size: .8rem; font-weight: 700; }
+    .footer-links a:hover { color: var(--teal); }
 
-        .nav-links a:hover {
-            color: #ffd700;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding-top: 80px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            color: #333;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .features {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .about {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #666;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .about-image i {
-            font-size: 15rem;
-            color: #667eea;
-            opacity: 0.7;
-        }
-
-        .projects {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .projects h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            margin-bottom: 1rem;
-        }
-
-        .project-link {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 1rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #ffd700;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-image i {
-                font-size: 8rem;
-            }
-        }
-    </style>
+    /* small details and responsive */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.25,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .project-card:nth-child(2) { transition-delay: .07s; }
+    :focus-visible { outline: 3px solid #efb65b; outline-offset: 4px; }
+    @media (max-width: 920px) {
+      .hero { padding-top: 55px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+      .hero-copy { max-width: 760px; }
+      .lab-art { width: min(590px, 100%); margin-inline: auto; min-height: 450px; }
+      .math-card { right: 6%; }
+      .meal-card { left: 6%; }
+      .hero h1 { max-width: 800px; }
+      .hero-text { max-width: 720px; }
+      .project-visual { min-height: 250px; padding: 18px; }
+      .project-body { padding: 23px; }
+      .philosophy-panel { grid-template-columns: 1fr 140px; }
+      .philosophy-symbol { width: 130px; height: 130px; }
+      .symbol-inner { width: 84px; height: 84px; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 32px, var(--content)); }
+      .section { padding-block: 74px; }
+      .nav { min-height: 72px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links { display: none; position: absolute; top: calc(100% + 1px); right: 0; left: 0; padding: 15px 20px 20px; border-bottom: 1px solid var(--line); background: rgba(247,247,242,.98); box-shadow: 0 15px 20px rgba(22,59,57,.05); align-items: stretch; gap: 4px; }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 10px 8px; }
+      .nav-links .nav-cta { text-align: center; margin-top: 4px; }
+      .hero { padding: 46px 0 58px; }
+      .hero h1 { font-size: clamp(2.45rem, 11vw, 4.1rem); line-height: 1.2; }
+      .hero h1 .highlight { white-space: normal; }
+      .hero h1 .highlight::after { height: 9px; }
+      .hero-text { margin: 19px 0 22px; font-size: 1rem; line-height: 1.9; }
+      .hero-actions { align-items: stretch; }
+      .hero-actions .btn { flex: 1 1 auto; padding-inline: 14px; }
+      .hero-note { align-items: flex-start; line-height: 1.8; }
+      .lab-art { min-height: 385px; margin-top: 2px; }
+      .orbit { width: 300px; height: 300px; }
+      .math-card { top: 24px; right: 2%; width: min(265px, 78%); }
+      .meal-card { bottom: 20px; left: 1%; width: min(265px, 78%); }
+      .art-sticker { top: 36px; left: 2px; transform: rotate(-8deg) scale(.88); transform-origin: left top; }
+      .math-inner { padding: 13px; }
+      .math-inner h3 { margin-bottom: 10px; font-size: .98rem; }
+      .sum-box { min-height: 90px; }
+      .sum-equation { font-size: 1.35rem; }
+      .answer { min-height: 37px; }
+      .meal-inner { padding: 12px; }
+      .meal-content { grid-template-columns: 78px 1fr; gap: 8px; }
+      .dish-art { height: 82px; }
+      .ingredient { font-size: .62rem; }
+      .art-caption { font-size: .65rem; bottom: -2px; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 27px; }
+      .section-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+      .section-description { font-size: .98rem; }
+      .project-grid { grid-template-columns: 1fr; gap: 18px; }
+      .project-visual { min-height: 250px; }
+      .fursan-window { padding: 15px; gap: 12px; }
+      .fursan-window-copy strong { font-size: 1.03rem; }
+      .fursan-number { height: 55px; font-size: 1.15rem; }
+      .project-body { padding: 21px; }
+      .project-title { font-size: 1.5rem; }
+      .project-description { font-size: .93rem; }
+      .project-footer { align-items: flex-start; flex-direction: column; }
+      .philosophy { padding-block: 72px; }
+      .philosophy-panel { grid-template-columns: 1fr; gap: 24px; padding: 30px 25px; border-radius: 23px; }
+      .philosophy-copy h2 { font-size: 2rem; }
+      .philosophy-symbol { justify-self: start; width: 96px; height: 96px; }
+      .symbol-inner { width: 65px; height: 65px; border-radius: 20px; }
+      .symbol-inner svg { width: 39px; }
+      .method-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 25px; }
+      .method-card { padding: 22px; }
+      .method-card h3 { margin-top: 13px; }
+      .about-section { padding-top: 0; padding-bottom: 70px; }
+      .about-panel { align-items: flex-start; flex-direction: column-reverse; gap: 18px; padding: 25px; }
+      .about-stamp { flex-basis: 78px; width: 78px; height: 78px; }
+      .about-stamp span { font-size: .58rem; }
+      .footer-inner { align-items: flex-start; flex-direction: column; gap: 15px; }
+      .footer-links { flex-wrap: wrap; }
+    }
+    @media (max-width: 390px) {
+      .brand-name { font-size: .95rem; }
+      .brand-mark { width: 39px; height: 39px; }
+      .hero-actions { flex-direction: column; }
+      .lab-art { min-height: 354px; }
+      .math-card { width: 78%; }
+      .meal-card { width: 78%; }
+      .art-sticker { transform: rotate(-8deg) scale(.76); }
+      .math-inner { padding: 11px; }
+      .math-challenge { gap: 7px; }
+      .meal-heading h3 { font-size: .9rem; }
+      .project-visual { padding: 15px; min-height: 225px; }
+      .fursan-window { gap: 8px; padding: 11px; }
+      .fursan-window-copy strong { font-size: .92rem; }
+      .fursan-window-copy p { font-size: .61rem; }
+      .fursan-number { height: 48px; font-size: 1rem; }
+      .dinner-feature { grid-template-columns: 1fr 82px; padding: 9px; }
+      .dinner-dish { height: 80px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">🤖 Bassam AI Lab</div>
-            <ul class="nav-links">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#about">من أنا</a></li>
-                <li><a href="#projects">المشاريع</a></li>
-                <li><a href="#contact">التواصل</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="BassamAI Lab — الصفحة الرئيسية">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M7 22.5 12.3 9h3.4L21 22.5M9.2 17.5h9.6M20.8 11.2l4.8 2.8-4.8 2.8" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25.8" cy="22.5" r="2.2" fill="#F0CF76"/></svg>
+        </span>
+        <span><span class="brand-name">BassamAI<span>Lab</span>.</span><span class="brand-sub">مختبر الأفكار والتجارب</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="site-menu">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nav-links" id="site-menu" aria-label="التنقل الرئيسي">
+        <a href="#projects">المشاريع</a>
+        <a href="#philosophy">فلسفة المختبر</a>
+        <a href="#about">عن بسام</a>
+        <a class="nav-cta" href="#projects">ادخل المختبر <span aria-hidden="true">↙</span></a>
+      </nav>
+    </div>
+  </header>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>مرحباً بك في مختبر الذكاء الاصطناعي</h1>
-                <p>أتمتة المهام اليومية باستخدام تقنيات الذكاء الاصطناعي الحديثة</p>
-                <a href="#projects" class="cta-button">استكشف المشاريع</a>
-            </div>
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="status-pill"><span class="status-dot" aria-hidden="true"></span> مختبر شخصي · تجارب الذكاء الاصطناعي</div>
+          <h1>أفكار تبدأ بالفضول،<br><span class="highlight">وتصير شيئًا حقيقيًا.</span></h1>
+          <p class="hero-text">مساحة شخصية أستكشف فيها إمكانات الذكاء الاصطناعي، وأحوّل الأفكار والاحتياجات إلى مشاريع رقمية قابلة للاستخدام. هنا أجرّب، وأبني، وأتعلّم في الطريق.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">اكتشف المشاريع <span aria-hidden="true">↙</span></a>
+            <a class="btn btn-secondary" href="#about">حكاية المختبر <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-note">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="5"/></svg>
+            ليس معرض أدوات؛ بل مساحة لما يمكن صنعه بها.
+          </div>
         </div>
+
+        <div class="lab-art reveal" aria-label="تصور بصري لمشروعي فرسان الحساب ودليل العشاء المنزلي الذكي">
+          <div class="art-grid" aria-hidden="true"></div><div class="orbit" aria-hidden="true"></div>
+          <div class="art-sticker"><span class="sticker-star">✳</span> الفضول هو نقطة البداية</div>
+          <article class="mini-card math-card" aria-label="تصميم توضيحي لفرسان الحساب">
+            <div class="card-top"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-label">FURSAN / LEARN</span></div>
+            <div class="math-inner">
+              <div class="tiny-kicker">تحدّي اليوم</div><h3>فلنُتقن الحساب معًا</h3>
+              <div class="math-challenge">
+                <div class="sum-box"><small>أوجد الناتج</small><div class="sum-equation">7 × 8</div><div style="font-size:.67rem;font-weight:800">= ?</div></div>
+                <div class="answer-grid"><div class="answer">48</div><div class="answer correct">56 ✓</div><div class="answer">54</div><div class="answer">64</div></div>
+              </div>
+              <div class="progress-row"><span>تقدّمك في التحدي</span><span>68%</span></div><div class="progress"><span></span></div>
+            </div>
+          </article>
+          <article class="mini-card meal-card" aria-label="تصميم توضيحي لدليل العشاء المنزلي الذكي">
+            <div class="card-top"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-label">DINNER / PLANNER</span></div>
+            <div class="meal-inner">
+              <div class="meal-heading"><div><div class="tiny-kicker">فكرة لوجبة اليوم</div><h3>ماذا نطبخ الليلة؟</h3></div><span class="meal-badge">خطة ذكية ✦</span></div>
+              <div class="meal-content">
+                <div class="dish-art" aria-hidden="true">
+                  <svg viewBox="0 0 120 100" fill="none"><ellipse cx="60" cy="53" rx="47" ry="37" fill="#E7D8B9"/><ellipse cx="60" cy="51" rx="39" ry="30" fill="#FFF9EC"/><ellipse cx="60" cy="51" rx="30" ry="22" fill="#D7E1B5"/><path d="M34 53c5-12 15-17 23-8s15 8 25-1 14 1 7 12-18 15-29 9-21 0-26-12Z" fill="#8DB77A"/><circle cx="45" cy="42" r="7" fill="#E88B69"/><circle cx="72" cy="59" r="8" fill="#EBA17A"/><circle cx="67" cy="39" r="5" fill="#E9C967"/><path d="M40 61c4-7 7-9 12-10m22-4 5 6" stroke="#F5EACF" stroke-width="3" stroke-linecap="round"/><path d="M24 25 18 18m80 6 5-7" stroke="#86A679" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="ingredient-lines"><div class="ingredient">خضروات طازجة</div><div class="ingredient">مكونات متوفرة</div><div class="ingredient">خطوات بسيطة</div></div>
+              </div>
+            </div>
+          </article>
+          <div class="art-caption">مشاريع حقيقية تبدأ من أسئلة يومية</div>
+        </div>
+      </div>
     </section>
 
-    <section id="features" class="features">
-        <div class="container">
-            <h2>ما أقدمه</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>أتمتة العمليات</h3>
-                    <p>تطوير حلول ذكية لأتمتة المهام المتكررة وتوفير الوقت والجهد في بيئة العمل التعليمية</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>الذكاء الاصطناعي</h3>
-                    <p>استخدام تقنيات الذكاء الاصطناعي لتحليل البيانات وإنشاء تقارير ذكية</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>تحليل البيانات</h3>
-                    <p>تحليل بيانات التدريب والمتدربين لاستخراج رؤى مفيدة لتحسين العملية التدريبية</p>
-                </div>
-            </div>
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">من داخل المختبر</span><h2 class="section-title">أشياء خرجت من المختبر.</h2><p class="section-description">كل مشروع بدأ بسؤال مختلف، لكنه يشترك مع الآخر في الرغبة بتحويل الفكرة إلى شيء يمكن تجربته والاستفادة منه.</p></div>
+          <a class="small-link" href="#philosophy">ما الذي يجمعها؟ <span class="arrow" aria-hidden="true">↙</span></a>
         </div>
+        <div class="project-controls reveal" role="group" aria-label="تصفية المشاريع">
+          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">كل المشاريع <span>(2)</span></button>
+          <button class="filter-btn" type="button" data-filter="learning" aria-pressed="false">التعليم والتعلّم</button>
+          <button class="filter-btn" type="button" data-filter="daily-life" aria-pressed="false">الحياة اليومية</button>
+        </div>
+        <div class="project-grid">
+          <article class="project-card reveal" data-category="learning">
+            <div class="project-visual visual-fursan">
+              <span class="visual-label">التعلّم حين يصبح تجربة</span><span class="visual-index">01</span>
+              <div class="fursan-window" aria-hidden="true">
+                <div class="fursan-window-copy"><span class="fursan-mini-title">فرسان الحساب</span><strong>كل محاولة<br>تقرّبك من الإتقان.</strong><p>تحديات حسابية وتجربة تعلم تفاعلية.</p><span class="little-pill">هيا نبدأ ←</span></div>
+                <div class="fursan-number-board"><div class="fursan-number">7 × 8</div><div class="fursan-number">56</div><div class="fursan-number">6 × 9</div><div class="fursan-number">54</div></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>تعليم رقمي</span><span class="meta-dot" aria-hidden="true"></span><span>مشروع منشور</span></div>
+              <h3 class="project-title">فرسان الحساب</h3>
+              <p class="project-description">منصة تعليمية تفاعلية تجعل التدرّب على الحساب وجدول الضرب تجربة أكثر حيوية، وتمنح المتعلّم مساحة للتحدي والتقدّم.</p>
+              <div class="project-footer"><div class="project-tags"><span class="tag">تعلّم تفاعلي</span><span class="tag">تعليم</span></div><a class="project-link" href="https://fursan.bassamailab.xyz" target="_blank" rel="noopener noreferrer">جرّب المشروع <span class="link-icon" aria-hidden="true">↗</span></a></div>
+            </div>
+          </article>
+          <article class="project-card reveal" data-category="daily-life">
+            <div class="project-visual visual-dinner">
+              <span class="visual-label">حلّ عملي لاحتياج يومي</span><span class="visual-index">02</span>
+              <div class="dinner-window" aria-hidden="true">
+                <div class="dinner-head"><div><strong>دليل العشاء المنزلي الذكي</strong><small>أفكار أسهل لوجبات البيت</small></div><span class="dinner-mark">✳</span></div>
+                <div class="dinner-feature"><div><h4>العشاء صار أسهل</h4><p>أفكار، مكونات، وخطوات في مكان واحد.</p></div><div class="dinner-dish"><svg viewBox="0 0 120 100" fill="none"><ellipse cx="60" cy="53" rx="47" ry="37" fill="#E7D8B9"/><ellipse cx="60" cy="51" rx="39" ry="30" fill="#FFF9EC"/><ellipse cx="60" cy="51" rx="30" ry="22" fill="#D7E1B5"/><path d="M34 53c5-12 15-17 23-8s15 8 25-1 14 1 7 12-18 15-29 9-21 0-26-12Z" fill="#8DB77A"/><circle cx="45" cy="42" r="7" fill="#E88B69"/><circle cx="72" cy="59" r="8" fill="#EBA17A"/><circle cx="67" cy="39" r="5" fill="#E9C967"/><path d="M40 61c4-7 7-9 12-10m22-4 5 6" stroke="#F5EACF" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+                <div class="dinner-bars"><div class="dinner-bar">أفكار وجبات</div><div class="dinner-bar">المكونات</div><div class="dinner-bar">خطوات التحضير</div></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>الحياة اليومية</span><span class="meta-dot" aria-hidden="true"></span><span>مشروع منشور</span></div>
+              <h3 class="project-title">دليل العشاء المنزلي الذكي</h3>
+              <p class="project-description">تجربة رقمية توظّف الذكاء الاصطناعي في تنظيم أفكار العشاء المنزلي وتبسيط التخطيط لوجبة اليوم، انطلاقًا من حاجة يومية مألوفة.</p>
+              <div class="project-footer"><div class="project-tags"><span class="tag">أدوات ذكية</span><span class="tag">تخطيط الوجبات</span></div><a class="project-link" href="https://dinner.bassamailab.xyz" target="_blank" rel="noopener noreferrer">جرّب المشروع <span class="link-icon" aria-hidden="true">↗</span></a></div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>من أنا</h2>
-                    <p>أخصائي تدريب في مركز لتدريب المعلمين بوزارة التربية والتعليم في سلطنة عمان، أهتم بتطوير حلول الأتمتة باستخدام الذكاء الاصطناعي.</p>
-                    <p>أعمل على تطوير أدوات وسير عمل ذكية باستخدام منصة n8n لأتمتة المهام الإدارية والتعليمية، مما يساعد في تقليل الوقت المستغرق في الأعمال الروتينية والتركيز على الجوانب الإبداعية والتطويرية.</p>
-                    <p>هدفي هو مشاركة التجارب والخبرات في مجال الأتمتة مع المهتمين، وتقديم حلول عملية قابلة للتطبيق في البيئات التعليمية المختلفة.</p>
-                </div>
-                <div class="about-image">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-            </div>
+    <section class="philosophy" id="philosophy">
+      <div class="container">
+        <div class="philosophy-panel reveal">
+          <div class="philosophy-copy"><span class="eyebrow">فلسفة المختبر</span><h2>مجالات مختلفة.<br><span>فضول واحد.</span></h2><p>لا أبدأ دائمًا من المكان نفسه. أحيانًا توجد مشكلة تستحق حلًا، وأحيانًا تقودني فكرة مثيرة إلى تجربة جديدة. ما يجمع مشاريعي ليس المجال الذي تنتمي إليه، بل الرغبة في اكتشاف ما يمكن بناؤه عندما يلتقي الفضول بالأدوات المناسبة.</p></div>
+          <div class="philosophy-symbol" aria-hidden="true"><div class="symbol-inner"><svg viewBox="0 0 64 64" fill="none"><path d="M24 9h16m-13 0v14L15 44a8 8 0 0 0 7 12h20a8 8 0 0 0 7-12L37 23V9" stroke="#BFE6D9" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 41h22M26 34l5 3 6-7" stroke="#F0CF76" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="43" r="2" fill="#EEA17D"/></svg></div></div>
         </div>
+      </div>
     </section>
 
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>المشاريع والتجارب</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>منصة n8n للأتمتة</h3>
-                    <p>منصة متقدمة لأتمتة المهام الإدارية في مجال التدريب، تشمل إدارة البرامج التدريبية وتتبع المتدربين.</p>
-                    <a href="https://n8n.bassamailab.xyz" class="project-link">زيارة المنصة <i class="fas fa-external-link-alt"></i></a>
-                </div>
-                <div class="project-card">
-                    <h3>قريباً: وكلاء الذكاء الاصطناعي</h3>
-                    <p>تطوير وكلاء ذكاء اصطناعي متخصصين في التعليم والتدريب لمساعدة المعلمين والإداريين.</p>
-                    <a href="#" class="project-link">قيد التطوير...</a>
-                </div>
-                <div class="project-card">
-                    <h3>قريباً: أدوات تحليل البيانات</h3>
-                    <p>مجموعة أدوات لتحليل بيانات التدريب واستخراج رؤى مفيدة لتحسين جودة البرامج التدريبية.</p>
-                    <a href="#" class="project-link">قيد التطوير...</a>
-                </div>
-            </div>
+    <section class="section method-section">
+      <div class="container">
+        <div class="section-head reveal"><div><span class="eyebrow">كيف تتحول الفكرة إلى مشروع؟</span><h2 class="section-title">من السؤال إلى التجربة.</h2><p class="section-description">ليست وصفة ثابتة، لكنها طريقة أحب العودة إليها كلما بدأت شيئًا جديدًا.</p></div></div>
+        <div class="method-grid">
+          <article class="method-card reveal"><span class="method-number">01</span><h3>فضول أو احتياج</h3><p>فكرة تلفت انتباهي، أو مشكلة يومية أرى أن هناك طريقة أفضل للتعامل معها.</p></article>
+          <article class="method-card reveal"><span class="method-number">02</span><h3>تجريب وبناء</h3><p>أستكشف الأدوات المناسبة، وأختبر الاحتمالات، ثم أحوّل الفكرة إلى تجربة قابلة للاستخدام.</p></article>
+          <article class="method-card reveal"><span class="method-number">03</span><h3>مراجعة وتطوير</h3><p>أتعلم من الاستخدام والملاحظات، وأعدّل التجربة لتصبح أكثر وضوحًا وفائدة.</p></article>
         </div>
+      </div>
     </section>
 
-    <footer id="contact">
-        <div class="container">
-            <p>&copy; 2025 بسام للذكاء الاصطناعي - Bassam AI Lab. جميع الحقوق محفوظة.</p>
-            <div class="social-links">
-                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="mailto:contact@bassamailab.xyz" title="البريد الإلكتروني"><i class="fas fa-envelope"></i></a>
-            </div>
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-panel reveal">
+          <div class="about-copy"><span class="eyebrow">الشخص خلف التجارب</span><h2>أنا بسام، وهذا مختبري الشخصي.</h2><p>أتعامل مع الذكاء الاصطناعي بوصفه مساحة للتعلّم والتجريب وصناعة الأشياء، لا مجرد وسيلة للحصول على الإجابات. هذا المختبر يوثّق ما قادني الفضول أو الحاجة إلى بنائه، وما قد تقودني إليه الأفكار القادمة.</p></div>
+          <div class="about-stamp" aria-label="فضول، تجربة، بناء"><span>فضول<br>✳<br>تجربة · بناء</span></div>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="footer-brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 22.5 12.3 9h3.4L21 22.5M9.2 17.5h9.6M20.8 11.2l4.8 2.8-4.8 2.8" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25.8" cy="22.5" r="2.2" fill="#F0CF76"/></svg></span><span>BassamAI Lab <span class="footer-note">· أفكار وتجارب تستمر</span></span></a>
+      <div class="footer-note">© 2026 BassamAI Lab. صُنع بفضول.</div>
+      <nav class="footer-links" aria-label="روابط التذييل"><a href="#projects">المشاريع</a><a href="#about">عن المختبر</a><a href="#home">العودة للأعلى ↑</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.querySelector('.menu-toggle');
+    const siteMenu = document.querySelector('#site-menu');
+    if (menuToggle && siteMenu) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = siteMenu.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? 'إغلاق القائمة' : 'فتح القائمة');
+      });
+      siteMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        siteMenu.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'فتح القائمة');
+      }));
+    }
+
+    // Project filters
+    const filterButtons = [...document.querySelectorAll('.filter-btn')];
+    const projectCards = [...document.querySelectorAll('.project-card')];
+    filterButtons.forEach(button => button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      filterButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      projectCards.forEach(card => {
+        card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      });
+    }));
+
+    // Gentle reveal animation, with graceful fallback when IntersectionObserver is unavailable.
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
         });
-
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(20px)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.1)';
-                header.style.backdropFilter = 'blur(10px)';
-            }
-        });
-
-        // Add animation to feature cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(card);
-        });
-    </script>
+      }, { threshold: 0.12 });
+      revealElements.forEach(element => observer.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add('is-visible'));
+    }
+  </script>
 </body>
 </html>
