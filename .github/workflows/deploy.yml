@@ -29,9 +29,20 @@ jobs:
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          # DEPLOY_SSH_KEY may be the PEM key itself or a single-line base64 of it
+          # (base64 is safer to copy from a terminal). Stray CR/spaces are removed.
+          if printf '%s' "$DEPLOY_SSH_KEY" | grep -q 'BEGIN OPENSSH PRIVATE KEY'; then
+            printf '%s\n' "$DEPLOY_SSH_KEY" | tr -d '\r' | sed 's/[[:space:]]*$//' > ~/.ssh/deploy_key
+          else
+            printf '%s' "$DEPLOY_SSH_KEY" | tr -d ' \t\r\n' | base64 -d > ~/.ssh/deploy_key
+          fi
           chmod 600 ~/.ssh/deploy_key
-          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key > ~/.ssh/deploy_key.pub 2>/dev/null; then
+            echo "::error::DEPLOY_SSH_KEY is not a valid private key — re-copy it"
+            exit 1
+          fi
+          echo "Key fingerprint: $(ssh-keygen -lf ~/.ssh/deploy_key.pub)"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key \
               -o IdentitiesOnly=yes \
               -o StrictHostKeyChecking=yes \
