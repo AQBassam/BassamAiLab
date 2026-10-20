@@ -1,0 +1,50 @@
+name: Deploy to VPS
+
+# Runs when the published site files change on main, or manually from the Actions tab.
+# The SSH key stored in DEPLOY_SSH_KEY can only run /usr/local/bin/bassamailab-deploy
+# on the server (forced command), so this job cannot do anything else there.
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - assets/**
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-bassamailab
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Deploy over SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy_key \
+              -o IdentitiesOnly=yes \
+              -o StrictHostKeyChecking=yes \
+              -o ConnectTimeout=15 \
+              deploy@161.97.99.78 "$GITHUB_SHA"
+
+      - name: Verify from the public internet
+        run: |
+          sleep 2
+          for u in / /assets/og-image.jpg /assets/favicon.svg /assets/fursan-preview.webp /assets/dinner-preview.webp; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://bassamailab.xyz$u")
+            echo "$code  $u"
+            [ "$code" = 200 ] || exit 1
+          done
+          curl -s --max-time 15 https://bassamailab.xyz/ | grep -q 'og:image'
+          echo "Deployed $GITHUB_SHA"
