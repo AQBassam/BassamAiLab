@@ -29,6 +29,10 @@ jobs:
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
           install -m 700 -d ~/.ssh
+          # Diagnostics only (no key material): size, line count, first 12 chars
+          # (a fixed, non-secret header) and a short hash of the whitespace-stripped value.
+          STRIPPED="$(printf '%s' "$DEPLOY_SSH_KEY" | tr -d ' \t\r\n')"
+          echo "::notice title=Key secret check::chars=$(printf '%s' "$DEPLOY_SSH_KEY" | wc -c) lines=$(printf '%s\n' "$DEPLOY_SSH_KEY" | wc -l) stripped=${#STRIPPED} starts=${STRIPPED:0:12} sha=$(printf '%s' "$STRIPPED" | sha256sum | cut -c1-16)"
           # DEPLOY_SSH_KEY may be the PEM key itself or a single-line base64 of it
           # (base64 is safer to copy from a terminal). Stray CR/spaces are removed.
           if printf '%s' "$DEPLOY_SSH_KEY" | grep -q 'BEGIN OPENSSH PRIVATE KEY'; then
@@ -41,7 +45,7 @@ jobs:
             echo "::error::DEPLOY_SSH_KEY is not a valid private key — re-copy it"
             exit 1
           fi
-          echo "Key fingerprint: $(ssh-keygen -lf ~/.ssh/deploy_key.pub)"
+          echo "::notice title=Key fingerprint::$(ssh-keygen -lf ~/.ssh/deploy_key.pub)"
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key \
               -o IdentitiesOnly=yes \
